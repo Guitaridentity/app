@@ -23,6 +23,7 @@ class UserDetail extends Model
     ];
 
     protected $fillable = [
+        'user_id',
         'text',
         'www',
         'facebook',

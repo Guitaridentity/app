@@ -1,8 +1,23 @@
 <?php
 
+Route::post('login', 'Api\\AuthController@login');
+Route::post('register', 'Api\\AuthController@register');
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('register_complete', 'Api\\UserController@register_complete');
+    Route::post('stage', 'Api\\StageController@stage');
+    Route::post('profile', 'Api\\ProfileController@profile');
+    Route::post('profile_edit', 'Api\\ProfileController@profile_edit');
+    Route::post('profile_editimage', 'Api\\ProfileController@profile_editimage');
+});
+
+
+
+
+
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:sanctum']], function () {
     // Users
-    Route::apiResource('users', 'UsersApiController');
+    Route::apiResource('users', 'UsersApiController'); 
 
     // User Profession
     Route::apiResource('user-professions', 'UserProfessionApiController');
